@@ -29,6 +29,7 @@
   "scripts": {
     "server:start": "esy b dune exec --root . server/server.exe",
     "server:build": "esy b dune build",
+    "server:dev": "watchexec -w server -e re -r -s SIGKILL esy server:start",
 
     "client:build": "esy b mel build",
     "client:start": "esy x node _build/default/client/client.bs.js",

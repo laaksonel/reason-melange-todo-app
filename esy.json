@@ -2,9 +2,13 @@
   "name": "fullstack-melange",
   "dependencies": {
     "ocaml": "4.14.0",
+
     "@opam/reason": "3.8.0",
     "melange": "melange-re/melange#57faf26",
-    "@opam/cmdliner": "1.1.0"
+    "@opam/cmdliner": "1.1.0",
+
+    "@opam/opium": "0.20.0",
+    "@opam/logs": "0.7.0"
   },
   "devDependencies": {
     "@opam/ocaml-lsp-server": "*"
@@ -23,7 +27,12 @@
     "pnp": false
   },
   "scripts": {
-    "start": "dune exec --root . server/server.exe",
-    "clean": "dune clean"
+    "server:start": "esy b dune exec --root . server/server.exe",
+    "server:build": "esy b dune build",
+
+    "client:build": "esy b mel build",
+    "client:start": "esy x node _build/default/client/client.bs.js",
+
+    "clean": "esy b dune clean"
   }
 }

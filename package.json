@@ -1,0 +1,7 @@
+{
+  "name": "fullstack-melange",
+  "scripts": {
+    "build": "esy mel build -- --root .",
+    "start": "esy x node _build/default/client/client.bs.js"
+  }
+}

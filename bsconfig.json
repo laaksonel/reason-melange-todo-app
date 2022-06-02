@@ -1,0 +1,13 @@
+{
+  "name": "fullstack-melange",
+  "bs-dependencies": [],
+  "suffix": ".bs.js",
+  "sources": [
+    "common",
+    "client"
+  ],
+  "package-specs": [{
+    "in-source": true,
+    "module": "commonjs"
+  }]
+}

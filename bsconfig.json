@@ -6,6 +6,10 @@
     "common",
     "client"
   ],
+  "reason": { "react-jsx": 3 },
+  "bs-dependencies": [
+    "reason-react"
+  ],
   "package-specs": [{
     "in-source": true,
     "module": "commonjs"

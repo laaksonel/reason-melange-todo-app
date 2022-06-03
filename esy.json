@@ -4,7 +4,7 @@
     "ocaml": "4.14.0",
 
     "@opam/reason": "3.8.0",
-    "melange": "melange-re/melange#57faf26",
+    "melange": "melange-re/melange#b04617b360a18a37a963ce0b012a238fb84b26f8",
     "@opam/cmdliner": "1.1.0",
 
     "@opam/opium": "0.20.0",
@@ -31,7 +31,7 @@
     "server:build": "esy b dune build",
     "server:dev": "watchexec -w server -e re -r -s SIGKILL esy server:start",
 
-    "client:build": "esy b mel build",
+    "client:build": "esy b mel build -w",
     "client:start": "esy x node _build/default/client/client.bs.js",
 
     "clean": "esy b dune clean"

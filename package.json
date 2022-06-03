@@ -3,11 +3,14 @@
   "dependencies": {
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
-    "reason-react": ">=0.7.1"
+    "reason-react": ">=0.7.1",
+    "esbuild": "*"
   },
   "devDependencies": {
     "bs-platform": "^9.0.2"
   },
   "scripts": {
+    "dev": "node build.mjs",
+    "client:build": "esy b mel build -w"
   }
 }

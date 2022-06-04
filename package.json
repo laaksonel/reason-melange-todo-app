@@ -1,12 +1,13 @@
 {
   "name": "reasonml-melange-todo-app",
   "dependencies": {
+    "esbuild": "*",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
-    "reason-react": ">=0.7.1",
-    "esbuild": "*"
+    "reason-react": ">=0.7.1"
   },
   "devDependencies": {
+    "@craftamap/esbuild-plugin-html": "^0.4.0",
     "bs-platform": "^9.0.2"
   },
   "scripts": {

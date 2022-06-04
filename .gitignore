@@ -13,3 +13,4 @@ dune.bsb
 dune.mel
 *.bs.js
 public/js
+dist/

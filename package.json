@@ -12,6 +12,7 @@
   },
   "scripts": {
     "dev": "node build.dev.mjs",
-    "client:build": "esy b mel build -w"
+    "client:build": "esy b mel build -w",
+    "dist": "node build.prod.mjs"
   }
 }

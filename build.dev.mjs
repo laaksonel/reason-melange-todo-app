@@ -1,12 +1,20 @@
 import { build, serve } from 'esbuild';
 import { createServer, request } from 'http';
+import { htmlPlugin } from '@craftamap/esbuild-plugin-html';
 
-const clients = []
+const clients = [];
+const entryFile = '_build/default/client/index.bs.js';
+const buildDir = '_build/dev';
+const htmlTempate = 'public/index.html';
 
 build({
-    entryPoints: ['_build/default/client/index.bs.js'],
+    entryPoints: [entryFile],
     bundle: true,
-    outfile: 'public/js/main.js',
+
+    // These must be set for htmlPlugin
+    outdir: buildDir,
+    metafile: true,
+
     // When the page first loads, this will open an event stream back to the client
     banner: { js: ' (() => new EventSource("/esbuild").onmessage = () => location.reload())();' },
     watch: {
@@ -16,12 +24,23 @@ build({
         clients.length = 0
         console.log(error ? error : '...')
       },
-    }
+    },
+    plugins: [
+        htmlPlugin({
+            files: [
+                {
+                    entryPoints: [entryFile],
+                    filename: 'index.html',
+                    htmlTemplate: htmlTempate
+                },
+            ]
+        })
+    ]
   })
   .catch(() => process.exit(1))
 
 // Create a serve server to port 8000
-serve({ servedir: './public' }, {}).then(() => {
+serve({ servedir: buildDir }, {}).then(() => {
   // Then create a new server to 3000
   createServer((req, res) => {
     const { url, method, headers } = req

@@ -11,7 +11,7 @@
     "bs-platform": "^9.0.2"
   },
   "scripts": {
-    "dev": "node build.mjs",
+    "dev": "node build.dev.mjs",
     "client:build": "esy b mel build -w"
   }
 }

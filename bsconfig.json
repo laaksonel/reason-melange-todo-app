@@ -1,15 +1,12 @@
 {
   "name": "fullstack-melange",
-  "bs-dependencies": [],
+  "bs-dependencies": ["@rescript/react"],
   "suffix": ".bs.js",
   "sources": [
     "common",
     "client"
   ],
   "reason": { "react-jsx": 3 },
-  "bs-dependencies": [
-    "reason-react"
-  ],
   "package-specs": [{
     "in-source": true,
     "module": "commonjs"

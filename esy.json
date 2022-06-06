@@ -8,7 +8,8 @@
     "@opam/cmdliner": "1.1.0",
 
     "@opam/opium": "0.20.0",
-    "@opam/logs": "0.7.0"
+    "@opam/logs": "0.7.0",
+    "@opam/crunch": "*"
   },
   "devDependencies": {
     "@opam/ocaml-lsp-server": "*"

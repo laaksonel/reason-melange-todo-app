@@ -1,3 +1,5 @@
 (executable
  (name server)
- (libraries common opium logs))
+ (libraries common opium logs lwt api)
+ (preprocess
+  (pps lwt_ppx ppx_yojson)))

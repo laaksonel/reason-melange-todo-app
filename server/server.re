@@ -6,6 +6,7 @@ let () = {
 
   App.empty
   |> App.middleware(Middleware.logger)
+  |> Db.middleware
   |> (initial_app) => List.fold_left((app', handler) => handler(app'), initial_app, Api.Handlers.handlers)
   |> App.run_command;
 }

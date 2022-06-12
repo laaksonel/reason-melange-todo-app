@@ -1,0 +1,4 @@
+(library
+ (name db)
+  (preprocess
+   (pps ppx_yojson_conv)))

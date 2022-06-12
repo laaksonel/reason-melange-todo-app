@@ -1,2 +1,4 @@
 (library
- (name domain))
+ (name domain)
+  (preprocess
+   (pps ppx_yojson_conv)))

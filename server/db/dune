@@ -1,4 +1,3 @@
 (library
  (name db)
-  (preprocess
-   (pps ppx_yojson_conv)))
+ (libraries caqti-lwt caqti caqti-driver-postgresql opium core))

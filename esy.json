@@ -9,7 +9,8 @@
 
     "@opam/opium": "0.20.0",
     "@opam/logs": "0.7.0",
-    "@opam/ppx_yojson": "*"
+    "@opam/ppx_yojson": "*",
+    "@opam/ppx_yojson_conv": "*"
   },
   "devDependencies": {
     "@opam/ocaml-lsp-server": "*"

@@ -10,7 +10,11 @@
     "@opam/opium": "0.20.0",
     "@opam/logs": "0.7.0",
     "@opam/ppx_yojson": "*",
-    "@opam/ppx_yojson_conv": "*"
+    "@opam/ppx_yojson_conv": "*",
+
+    "@opam/caqti": "*",
+    "@opam/caqti-lwt": "*",
+    "@opam/caqti-driver-postgresql": "*"
   },
   "devDependencies": {
     "@opam/ocaml-lsp-server": "*"

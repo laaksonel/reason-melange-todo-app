@@ -11,6 +11,7 @@
     "@opam/logs": "0.7.0",
     "@opam/ppx_yojson": "*",
     "@opam/ppx_yojson_conv": "*",
+    "@opam/core": "*",
 
     "@opam/caqti": "*",
     "@opam/caqti-lwt": "*",

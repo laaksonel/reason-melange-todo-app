@@ -1,5 +1,11 @@
 (executable
  (name server)
+ (modules server)
  (libraries common opium logs lwt api db)
  (preprocess
   (pps lwt_ppx ppx_yojson)))
+
+(executable
+ (name migrate)
+ (modules migrate)
+ (libraries cmdliner))

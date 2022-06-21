@@ -13,5 +13,4 @@ let respond = (~headers=?, ~status=?, body) => {
 }
 
 let respond_error = () =>
-  respond(~status=`Internal_server_error, `String("FOO"))
-
+  respond(~status=`Internal_server_error, `String("Unknown error"))

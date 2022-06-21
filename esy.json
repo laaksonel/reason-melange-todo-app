@@ -12,10 +12,13 @@
     "@opam/ppx_yojson": "*",
     "@opam/ppx_yojson_conv": "*",
     "@opam/core": "*",
+    "@opam/core_unix": "*",
 
     "@opam/caqti": "*",
     "@opam/caqti-lwt": "*",
-    "@opam/caqti-driver-postgresql": "*"
+    "@opam/caqti-driver-postgresql": "*",
+    "@opam/ppx_rapper": "*",
+    "@opam/ppx_rapper_lwt": "*"
   },
   "devDependencies": {
     "@opam/ocaml-lsp-server": "*"

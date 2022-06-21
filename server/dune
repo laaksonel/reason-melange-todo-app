@@ -8,4 +8,6 @@
 (executable
  (name migrate)
  (modules migrate)
- (libraries cmdliner))
+ (libraries cmdliner core_unix core_unix.sys_unix caqti-lwt ppx_rapper ppx_rapper_lwt ptime.clock.os caqti caqti-driver-postgresql)
+ (preprocess
+  (pps lwt_ppx ppx_rapper)))

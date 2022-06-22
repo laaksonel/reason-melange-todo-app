@@ -16,14 +16,13 @@ let hello_world = {
   [ hello ]
 }
 
-let todo = {
+module Todo (Db: (module type of Db)) {
   let create = {
     let module P = Parameters.Make.Json.Only (Todo.Create.Parameters);
     let module R = Responses.Make.Created.Int (Todo.Create.Responses, Todo.Create);
 
-    Route_builder.specification_to_route((module Todo.Create), P.f, Controllers.Todo.create, R.f);
+    Route_builder.specification_to_route((module Todo.Create), P.f, Controllers.Todo.create(Db.run_query), R.f);
   };
-
 
   let index = {
     let module P = Parameters.Make.None(Todo.Index.Parameters);
@@ -32,7 +31,6 @@ let todo = {
     Route_builder.specification_to_route((module Todo.Index), P.f, Controllers.Todo.index, R.f);
   };
 
-  [ create, index ]
+  let endpoints = [ create, index ];
 }
 
-let handlers = List.flatten([ hello_world, todo ])

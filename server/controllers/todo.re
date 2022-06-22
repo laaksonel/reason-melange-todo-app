@@ -1,6 +1,6 @@
 open Domain;
 // TODO: Create ppx for IDless versions
-let create = ({ title, completed, _ }: Todo.No_id.t) => {
+let create = (q) => ({ title, completed, _ }: Todo.No_id.t) => {
   Logs.info(m => m("Creating a new todo (%s, %s)", title, string_of_bool(completed)));
 
   let create =
@@ -12,7 +12,7 @@ let create = ({ title, completed, _ }: Todo.No_id.t) => {
         RETURNING @int{id}
         |sql})]
 
-  Db.run_query(create(~title, ~completed=false));
+  q(create(~title, ~completed=false));
 }
 
 let index = () => [] |> Lwt_result.return

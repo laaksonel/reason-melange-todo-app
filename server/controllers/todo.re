@@ -1,6 +1,21 @@
-open Domain;
+open Domain.Todo;
+
+
+let get_todos = (q) => () => {
+  let todos =
+    [%rapper
+      get_many(
+        {sql|
+        SELECT @int{id}, @string{title}, @bool{completed}
+        FROM todos
+        |sql}, record_out)
+    ]();
+
+  q(todos);
+}
+
 // TODO: Create ppx for IDless versions
-let create = (q) => ({ title, completed, _ }: Todo.No_id.t) => {
+let create = (q) => ({ title, completed, _ }: No_id.t) => {
   Logs.info(m => m("Creating a new todo (%s, %s)", title, string_of_bool(completed)));
 
   let create =
@@ -15,4 +30,3 @@ let create = (q) => ({ title, completed, _ }: Todo.No_id.t) => {
   q(create(~title, ~completed=false));
 }
 
-let index = () => [] |> Lwt_result.return

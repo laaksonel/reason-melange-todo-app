@@ -28,7 +28,7 @@ module Todo (Db: (module type of Db)) {
     let module P = Parameters.Make.None(Todo.Index.Parameters);
     let module R = Responses.Make.Json_list(Todo.Index.Responses);
 
-    Route_builder.specification_to_route((module Todo.Index), P.f, Controllers.Todo.index, R.f);
+    Route_builder.specification_to_route((module Todo.Index), P.f, Controllers.Todo.index(Db.run_query), R.f);
   };
 
   let endpoints = [ create, index ];

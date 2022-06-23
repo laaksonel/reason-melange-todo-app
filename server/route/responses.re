@@ -63,4 +63,8 @@ module Make = {
       `Json(json_of_list) |> respond
     }
   }
+
+  module No_content (Responses : No_content) = {
+    let f () = `String("") |> respond(~status=`No_content);
+  }
 }

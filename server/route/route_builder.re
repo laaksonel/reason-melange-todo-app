@@ -16,14 +16,7 @@ module type Specification = {
 }
 
 let handle = (req, input_f, impl_f, output_f) => {
-  // req has the ref to db
-  // Input_f only converts json to domain model
-  /* let pool = req.Request.env */
-  /*   |> Opium.Context.find_exn(Db.key); */
-
-  /* let run_query = q => Db.query_pool(q, pool); */
-
-  let%lwt impl_output = req |> input_f >>= (x) => impl_f(x); // We need to pass db reference here
+  let%lwt impl_output = req |> input_f >>= (x) => impl_f(x);
 
   switch impl_output {
   | Ok(y) => output_f(y)

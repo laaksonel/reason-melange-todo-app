@@ -1,6 +1,5 @@
 open Domain.Todo;
 
-
 let get_todos = (q) => () => {
   let todos =
     [%rapper
@@ -15,7 +14,7 @@ let get_todos = (q) => () => {
 }
 
 // TODO: Create ppx for IDless versions
-let create = (q) => ({ title, completed, _ }: No_id.t) => {
+let create = (q) => ({ title, completed}: No_id.t) => {
   Logs.info(m => m("Creating a new todo (%s, %s)", title, string_of_bool(completed)));
 
   let create =
@@ -28,5 +27,19 @@ let create = (q) => ({ title, completed, _ }: No_id.t) => {
         |sql})]
 
   q(create(~title, ~completed=false));
+}
+
+let update = (q) => (todo) => {
+  let update =
+    [%rapper
+      execute(
+        {sql|
+        UPDATE todos
+        SET id = %int{id}, title = %string{title}, completed = %bool{completed}
+        WHERE id = %int{id}
+        |sql}, record_in)
+    ]
+
+  q(update(todo));
 }
 

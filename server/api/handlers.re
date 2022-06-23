@@ -38,6 +38,13 @@ module Todo (Db: (module type of Db)) {
     Route_builder.specification_to_route((module Todo.Update), P.f, Controllers.Todo.update(Db.run_query), R.f);
   };
 
-  let endpoints = [ index, create, update];
+  let show = {
+    let module P = Parameters.Make.Path.One.Only(Todo.Show.Parameters, Todo.Show);
+    let module R = Responses.Make.Json_opt(Todo.Show.Responses);
+
+    Route_builder.specification_to_route((module Todo.Show), P.f, Controllers.Todo.show(Db.run_query), R.f);
+  };
+
+  let endpoints = [ index, create, update, show];
 }
 

@@ -1,5 +1,5 @@
 (library
  (name route)
- (libraries opium lwt db)
+ (libraries opium lwt db str)
  (preprocess
   (pps lwt_ppx ppx_yojson ppx_yojson_conv)))

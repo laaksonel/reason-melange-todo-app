@@ -64,6 +64,15 @@ module Make = {
     }
   }
 
+  module Json_opt (Responses : Json_opt) = {
+    let f = (~status=`Not_found, content_opt) => {
+      switch content_opt {
+      | Some(content) => `Json(content |> Responses.yojson_of_t) |> respond
+      | None => `String("") |> respond(~status)
+      }
+    }
+  }
+
   module No_content (Responses : No_content) = {
     let f () = `String("") |> respond(~status=`No_content);
   }

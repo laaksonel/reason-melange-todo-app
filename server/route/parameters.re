@@ -14,10 +14,23 @@ let try_with_json_error = f => {
   }
 }
 
-
 module type Json = {
   type t
   let t_of_yojson : Yojson.Safe.t => t
+}
+
+module Path = {
+  module type One = {
+    type t
+    let of_string : string => t
+  }
+
+  module One = {
+    module Int = {
+      type t = int
+      let of_string = int_of_string
+    }
+  }
 }
 
 module Make = {
@@ -35,17 +48,26 @@ module Make = {
       }
     }
   }
-}
 
-module Path = {
-  module type One = {
-    type t
-    let of_string : string => t
-  }
+  module Path = {
+    let get_one_param_name = (module S : Route_builder.Specification) => {
+      let colon_count = Core.String.count(~f=Core.Char.equal(':'), S.path);
+      let () = assert(colon_count == 1);
 
-  module One = {
-    module Int = {
-      type t = int
+      let pattern = Str.regexp({re|.*:\([^/]*\)\(/\|$\)|re});
+      let () = assert(Str.string_match(pattern, S.path, 0));
+      Str.matched_group(1, S.path);
+    }
+
+    module One = {
+      module Only (Parameters: Path.One, S: Route_builder.Specification) = {
+        let name = get_one_param_name (module S)
+
+        let f = req =>
+          Parameters.of_string(Opium.Router.param(req, name))
+          |> Lwt_result.return
+      }
     }
   }
 }
+

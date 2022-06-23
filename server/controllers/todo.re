@@ -43,3 +43,17 @@ let update = (q) => (todo) => {
   q(update(todo));
 }
 
+let show = (q) => (id) => {
+  let get_todo =
+    [%rapper
+      get_opt(
+        {sql|
+        SELECT @int{id}, @string{title}, @bool{completed}
+        FROM todos
+        WHERE id = %int{id}
+        |sql}, record_out)
+    ];
+
+  q(get_todo(~id));
+}
+

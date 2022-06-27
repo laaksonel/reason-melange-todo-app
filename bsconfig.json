@@ -1,6 +1,6 @@
 {
   "name": "fullstack-melange",
-  "bs-dependencies": ["@rescript/react"],
+  "bs-dependencies": ["@rescript/react", "restorative"],
   "suffix": ".bs.js",
   "sources": [
     "common",

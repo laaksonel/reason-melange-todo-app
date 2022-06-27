@@ -13,6 +13,20 @@ let get_todos = (q) => () => {
   q(todos);
 }
 
+let show = (q) => (id) => {
+  let get_todo =
+    [%rapper
+      get_opt(
+        {sql|
+        SELECT @int{id}, @string{title}, @bool{completed}
+        FROM todos
+        WHERE id = %int{id}
+        |sql}, record_out)
+    ];
+
+  q(get_todo(~id));
+}
+
 // TODO: Create ppx for IDless versions
 let create = (q) => ({ title, completed}: No_id.t) => {
   Logs.info(m => m("Creating a new todo (%s, %s)", title, string_of_bool(completed)));
@@ -41,19 +55,5 @@ let update = (q) => (todo) => {
     ]
 
   q(update(todo));
-}
-
-let show = (q) => (id) => {
-  let get_todo =
-    [%rapper
-      get_opt(
-        {sql|
-        SELECT @int{id}, @string{title}, @bool{completed}
-        FROM todos
-        WHERE id = %int{id}
-        |sql}, record_out)
-    ];
-
-  q(get_todo(~id));
 }
 

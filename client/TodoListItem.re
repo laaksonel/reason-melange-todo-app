@@ -1,6 +1,8 @@
 [@react.component]
-let make = (~id: int) => {
+let make = (~item: TodoItem.t) => {
   <li>
-  { React.int(id) }
+  { React.int(item.id) }
+  { React.string(item.title) }
+  { item.completed |> string_of_bool |> React.string }
   </li>
 };

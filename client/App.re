@@ -8,11 +8,11 @@ let make = () => {
   });
 
   <div>
-    <p>{ React.string("TODO") }</p>
+    <p>{ React.string("TODOs") }</p>
     <ul>
       {
         state.items
-          |> List.map((item: TodoItem.t) => <TodoListItem id=item.id />)
+          |> List.map((item: TodoItem.t) => <TodoListItem item=item />)
           |> Array.of_list
           |> React.array
       }

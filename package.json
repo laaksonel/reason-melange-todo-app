@@ -8,11 +8,16 @@
     "restorative": "^0.4.0-beta.1"
   },
   "devDependencies": {
-    "@craftamap/esbuild-plugin-html": "^0.4.0"
+    "@craftamap/esbuild-plugin-html": "^0.4.0",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.1"
   },
   "scripts": {
     "dev": "node build.dev.mjs",
     "client:build": "esy b mel build -w",
-    "dist": "node build.prod.mjs"
+    "dist": "node build.prod.mjs",
+    "bundle": "webpack --mode production --entry ./_build/default/client/index.bs.js",
+    "serve": "webpack serve --open --mode development --entry ./_build/default/client/index.bs.js"
   }
 }

@@ -1,8 +1,11 @@
 {
   "name": "reasonml-melange-todo-app",
   "dependencies": {
+    "@davesnx/styled-ppx": "file:./styled-ppx-ocaml-4.14",
     "@glennsl/bs-json": "^5.0.4",
     "@rescript/react": "^0.10.3",
+    "bs-css": "^15.3.0",
+    "bs-css-emotion": "^4.3.0",
     "bs-fetch": "^0.6.2",
     "esbuild": "*",
     "restorative": "^0.4.0-beta.1"
@@ -15,7 +18,7 @@
   },
   "scripts": {
     "dev": "node build.dev.mjs",
-    "client:build": "esy b mel build -w",
+    "client:build": "esy mel build -w",
     "dist": "node build.prod.mjs",
     "bundle": "webpack --mode production --entry ./_build/default/client/index.bs.js",
     "serve": "webpack serve --open --mode development --entry ./_build/default/client/index.bs.js"

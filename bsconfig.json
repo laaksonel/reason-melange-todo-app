@@ -1,14 +1,25 @@
 {
   "name": "fullstack-melange",
-  "bs-dependencies": ["@rescript/react", "restorative", "bs-fetch", "@glennsl/bs-json"],
+  "bs-dependencies": [
+    "@rescript/react",
+    "restorative",
+    "bs-fetch",
+    "@glennsl/bs-json",
+    "bs-css",
+    "bs-css-emotion"
+  ],
   "suffix": ".bs.js",
   "sources": [
     "common",
     "client"
   ],
+  "ppx-flags": ["@davesnx/styled-ppx/ppx"],
   "reason": { "react-jsx": 3 },
   "package-specs": [{
     "in-source": true,
     "module": "commonjs"
-  }]
+  }],
+  "warnings": {
+    "number" : "-20"
+  }
 }

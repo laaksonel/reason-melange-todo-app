@@ -1,0 +1,24 @@
+{
+  "name": "@davesnx/styled-ppx",
+  "version": "0.29.0",
+  "description": "Typed styled components in ReScript",
+  "homepage": "https://styled-ppx.vercel.app",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davesnx/styled-ppx.git"
+  },
+  "scripts": {
+    "postinstall": "node postinstall.js"
+  },
+  "bin": {
+    "styled-ppx": "styled-ppx.exe"
+  },
+  "files": [
+    "platform-windows-x64/",
+    "platform-linux-x64/",
+    "platform-darwin-x64/",
+    "postinstall.js",
+    "styled-ppx.exe"
+  ]
+}

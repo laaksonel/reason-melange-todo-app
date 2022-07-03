@@ -1,9 +1,6 @@
-let baseApiUri = "http://localhost:3001";
 
 let join = (input: list(string), delimiter: string): string =>
   List.fold_left((acc, input) => acc ++ delimiter ++ input, List.hd(input), List.tl(input));
-
-let resolveUri = (path: string): string => [baseApiUri, path] -> join("/");
 
 let decodeTodo = (json): TodoItem.t =>
   Json.Decode.{
@@ -18,13 +15,8 @@ let decodeTodoCollection = (json): TodoItemCollection.t =>
 
 let fetchTodos = () => {
   open Js.Promise;
-  Js.log("Fetching...");
-
-  let uri = resolveUri("todos");
-  Js.log("uri " ++ uri);
-
-  // Error handling
-  Fetch.fetch(uri)
+  // TODO: Error handling
+  Fetch.fetch("/todos")
   |> then_(Fetch.Response.json)
   |> then_(json =>
     json

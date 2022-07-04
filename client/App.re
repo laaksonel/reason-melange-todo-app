@@ -1,6 +1,7 @@
 module Container = [%styled.div
   {|
-    padding: 5%;
+  width: 100%;
+  margin: 0 auto;
   |}
 ];
 
@@ -23,13 +24,11 @@ let make = () => {
 
   <Container>
     <Text>{ React.string("TODOs") }</Text>
-    <ul>
-      {
-        state.items
-          |> List.map((item: TodoItem.t) => <TodoListItem key={string_of_int(item.id)} item />)
-          |> Array.of_list
-          |> React.array
-      }
-    </ul>
+    {
+      state.items
+        |> List.map((item: TodoItem.t) => <TodoListItem key={string_of_int(item.id)} item />)
+        |> Array.of_list
+        |> React.array
+    }
   </Container>
 };

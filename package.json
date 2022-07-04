@@ -8,6 +8,7 @@
     "bs-css-emotion": "^4.3.0",
     "bs-fetch": "^0.6.2",
     "esbuild": "*",
+    "rescript-material-ui": "^3.0.2",
     "restorative": "^0.4.0-beta.1"
   },
   "devDependencies": {

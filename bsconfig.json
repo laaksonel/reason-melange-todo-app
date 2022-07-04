@@ -6,7 +6,8 @@
     "bs-fetch",
     "@glennsl/bs-json",
     "bs-css",
-    "bs-css-emotion"
+    "bs-css-emotion",
+    "rescript-material-ui"
   ],
   "suffix": ".bs.js",
   "sources": [

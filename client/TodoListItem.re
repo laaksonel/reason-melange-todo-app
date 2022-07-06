@@ -27,12 +27,13 @@ module CompletedCheckbox = Mui.Checkbox;
 let toggleCompletetion = (id, e: ReactEvent.Form.t) => {
   let checked = ReactEvent.Form.target(e)##checked;
   Js.log(string_of_int(id) ++ " -> " ++ checked);
+  TodoService.toggleItem(id);
 };
 
 [@react.component]
 let make = (~item: TodoItem.t) => {
   <ItemContainer>
     <DescriptionText> {React.string(item.title)} </DescriptionText>
-    <CompletedCheckbox onChange={toggleCompletetion(item.id)} />
+    <CompletedCheckbox onChange={toggleCompletetion(item.id)} checked=item.completed />
   </ItemContainer>;
 };

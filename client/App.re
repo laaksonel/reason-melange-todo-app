@@ -1,15 +1,20 @@
-module Container = [%styled.div
+module TodoList = [%styled.div
   {|
-  width: 100%;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   |}
 ];
 
-module Text = [%styled.p
+module Topic = [%styled.div
   {|
-  font-size: 1.875rem;
-  text-decoration: none;
-  color: #4299E1;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-family: "Roboto";
+  padding: 20px 0 20px 0;
 |}
 ];
 
@@ -22,13 +27,15 @@ let make = () => {
     None;
   });
 
-  <Container>
-    <Text>{ React.string("TODOs") }</Text>
-    {
-      state.items
-        |> List.map((item: TodoItem.t) => <TodoListItem key={string_of_int(item.id)} item />)
-        |> Array.of_list
-        |> React.array
-    }
-  </Container>
+  <>
+    <Topic> {React.string("TODO")} </Topic>
+    <TodoList>
+      {state.items
+       |> List.map((item: TodoItem.t) =>
+            <TodoListItem key={string_of_int(item.id)} item />
+          )
+       |> Array.of_list
+       |> React.array}
+    </TodoList>
+  </>;
 };

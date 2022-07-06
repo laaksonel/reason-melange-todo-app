@@ -1,31 +1,38 @@
-module Container = [%styled.div
+module ItemContainer = [%styled.div
   {|
     background-color: #1e1e1e;
-    margin: 0 auto;
     width: 600px;
     border-radius: 10px;
+    justify-content: space-between;
+    display: flex;
+    padding-left: 10px;
+    margin-bottom: 10px;
   |}
 ];
 
-module Text = [%styled.p
+module Description = [%styled.div {|
+    display: flex;
+  |}];
+
+module DescriptionText = [%styled.p
   {|
-    padding: 20px 30px;
     color: white;
     font-family: "Roboto";
+    word-break: break-all;
   |}
 ];
 
-let toggleCompletetion = (e: ReactEvent.Form.t) => {
+module CompletedCheckbox = Mui.Checkbox;
+
+let toggleCompletetion = (id, e: ReactEvent.Form.t) => {
   let checked = ReactEvent.Form.target(e)##checked;
-  Js.log(checked);
+  Js.log(string_of_int(id) ++ " -> " ++ checked);
 };
 
 [@react.component]
 let make = (~item: TodoItem.t) => {
-  <Container>
-    <Text>
-      { React.string(item.title) }
-    </Text>
-    <Mui.Checkbox onChange=toggleCompletetion />
-  </Container>
+  <ItemContainer>
+    <DescriptionText> {React.string(item.title)} </DescriptionText>
+    <CompletedCheckbox onChange={toggleCompletetion(item.id)} />
+  </ItemContainer>;
 };

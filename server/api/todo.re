@@ -28,7 +28,7 @@ module Show = {
 
 module Update = {
   let verb = Methods.Put
-  let path = base_path
+  let path = base_path ++ "/:id"
 
   module Parameters = Domain.Todo
   module Responses = Responses.No_content

@@ -11,12 +11,18 @@ module Topic = [%styled.div
   {|
     font-size: 2rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     color: white;
     font-family: "Roboto";
-    padding: 20px 0 20px 0;
+    padding: 20px;
   |}
 ];
+
+module TopicSection = [%styled.div {|
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+  |}];
 
 module AddCircle = {
   [@bs.module "@material-ui/icons/AddCircle"] [@react.component]
@@ -51,10 +57,15 @@ let make = () => {
   };
 
   <>
-    <Topic> {React.string("TODO")} </Topic>
-    <Mui.IconButton onClick=openModal>
-      <AddCircle htmlColor="#f50057" />
-    </Mui.IconButton>
+    <Topic>
+      <TopicSection />
+      <TopicSection><p style=ReactDOM.Style.make(~textAlign="center", ~margin="0", ())>{React.string("TODO")}</p></TopicSection>
+      <TopicSection>
+        <Mui.IconButton onClick=openModal>
+          <AddCircle htmlColor="#f50057" fontSize="50px" />
+        </Mui.IconButton>
+      </TopicSection>
+    </Topic>
     <TodoList>
       {state.items
        |> List.map((item: TodoItem.t) =>
@@ -67,11 +78,9 @@ let make = () => {
       show
       onCancel=closeModal
       onSubmit={text =>
-                  TodoService.createTodo({
-                    id: 0,
-                    title: text,
-                    completed: false,
-                  }) |> closeModal}
+        TodoService.createTodo({id: 0, title: text, completed: false})
+        |> closeModal
+      }
     />
   </>;
 };

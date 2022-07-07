@@ -68,7 +68,6 @@ const copyPlatformBinaries = (platformPath) => {
 
 const arch = find_arch();
 const platformPath = "platform-" + platform + "-" + arch;
-console.log(platformPath);
 const supported = fs.existsSync(platformPath);
 
 if (!supported) {

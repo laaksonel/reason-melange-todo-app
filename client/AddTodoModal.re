@@ -55,8 +55,8 @@ let make = (~show: bool, ~onCancel: unit => unit, ~onSubmit) =>
 
     let (text, setText) = React.useState(_ => "");
 
-    <ModalContainer>
-      <ModalContent>
+    <ModalContainer onClick={_ => onCancel()}>
+      <ModalContent onClick={e => ReactEvent.Mouse.stopPropagation(e)}>
         <ModalHeader> {React.string("Add Todo")} </ModalHeader>
         <ModalBody>
           <Mui.TextField

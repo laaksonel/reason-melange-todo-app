@@ -23,6 +23,6 @@
     "client:build": "esy mel build -w",
     "dist": "node build.prod.mjs",
     "bundle": "webpack --mode production --entry ./_build/default/client/index.bs.js",
-    "serve": "webpack serve --open --mode development --entry ./_build/default/client/index.bs.js"
+    "serve": "webpack serve --mode development --entry ./_build/default/client/index.bs.js"
   }
 }

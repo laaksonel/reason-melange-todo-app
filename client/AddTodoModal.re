@@ -43,14 +43,17 @@ module ModalFooter = [%styled.div
   |}
 ];
 
-let useStyles = Mui.Styles.makeStyles({
-  "textfieldWidth": ReactDOM.Style.make(~width="100%", ())
-});
+let useStyles =
+  Mui.Styles.makeStyles({
+    "textfieldWidth": ReactDOM.Style.make(~width="100%", ()),
+  });
 
 [@react.component]
 let make = (~show: bool, ~onCancel: unit => unit, ~onSubmit) =>
   if (show) {
     let classes = useStyles(.);
+
+    let (text, setText) = React.useState(_ => "");
 
     <ModalContainer>
       <ModalContent>
@@ -58,15 +61,23 @@ let make = (~show: bool, ~onCancel: unit => unit, ~onSubmit) =>
         <ModalBody>
           <Mui.TextField
             variant=`standard
-            required={true}
-            classes={Mui.TextField.Classes.make(~root=classes##textfieldWidth, ())}
+            required=true
+            value={Mui.TextField.Value.string(text)}
+            onChange={e => {
+              let value = ReactEvent.Form.target(e)##value;
+              setText(_ => value);
+            }}
+            classes={Mui.TextField.Classes.make(
+              ~root=classes##textfieldWidth,
+              (),
+            )}
           />
         </ModalBody>
         <ModalFooter>
           <Mui.Button onClick={_ => onCancel()}>
             {React.string("Cancel")}
           </Mui.Button>
-          <Mui.Button onClick={_ => onSubmit()}>
+          <Mui.Button onClick={_ => onSubmit(text)}>
             {React.string("Save")}
           </Mui.Button>
         </ModalFooter>

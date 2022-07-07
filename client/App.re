@@ -42,13 +42,13 @@ let make = () => {
 
   let (show, setShow) = React.useState(_ => false);
 
-  let buttonClicked = _ => {
+  let openModal = _ => {
     setShow(_ => true);
   };
 
   <>
     <Topic> {React.string("TODO")} </Topic>
-    <Mui.IconButton onClick=buttonClicked>
+    <Mui.IconButton onClick=openModal>
       <AddCircle htmlColor="#f50057" />
     </Mui.IconButton>
     <TodoList>
@@ -62,7 +62,7 @@ let make = () => {
     <AddTodoModal
       show
       onCancel={() => setShow(_ => false)}
-      onSubmit=ignore
+      onSubmit={text => {Js.log(text)}}
     />
   </>;
 };

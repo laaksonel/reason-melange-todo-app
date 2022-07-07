@@ -31,7 +31,7 @@ let show = (q, id) => {
 };
 
 // TODO: Create ppx for IDless versions
-let create = (q, {title, completed}: No_id.t) => {
+let create = (q, {title, completed, _}) => {
   Logs.info(m =>
     m("Creating a new todo (%s, %s)", title, string_of_bool(completed))
   );

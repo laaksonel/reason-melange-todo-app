@@ -6,7 +6,7 @@ module Create = {
   let verb = Methods.Post;
   let path = base_path;
 
-  module Parameters = Domain.Todo.No_id;
+  module Parameters = Domain.Todo;
   module Responses = Responses.Json_item(Domain.Todo);
 };
 

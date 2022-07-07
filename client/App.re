@@ -46,6 +46,10 @@ let make = () => {
     setShow(_ => true);
   };
 
+  let closeModal = _ => {
+    setShow(_ => false);
+  };
+
   <>
     <Topic> {React.string("TODO")} </Topic>
     <Mui.IconButton onClick=openModal>
@@ -61,8 +65,13 @@ let make = () => {
     </TodoList>
     <AddTodoModal
       show
-      onCancel={() => setShow(_ => false)}
-      onSubmit={text => {Js.log(text)}}
+      onCancel=closeModal
+      onSubmit={text =>
+                  TodoService.createTodo({
+                    id: 0,
+                    title: text,
+                    completed: false,
+                  }) |> closeModal}
     />
   </>;
 };

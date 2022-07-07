@@ -76,3 +76,26 @@ let toggleItem = (id: int) => {
   | None => ()
   };
 };
+
+let createTodo = (newItem: TodoItem.t) => {
+  open Js.Promise;
+
+  let requestInit =
+    Fetch.RequestInit.make(
+      ~method_=Post,
+      ~body=Fetch.BodyInit.make(newItem |> encodeTodo |> Js.Json.stringify),
+      ~headers=Fetch.HeadersInit.make({"Content-Type": "application/json"}),
+      (),
+    );
+
+  Fetch.fetchWithInit("todos", requestInit)
+  |> then_(Fetch.Response.json)
+  |> then_(json =>
+       json
+       |> decodeTodo
+       |> (
+         todo => resolve(TodoStore.store.dispatch(TodoStore.AddItem(todo)))
+       )
+     )
+  |> ignore;
+};

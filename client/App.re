@@ -40,8 +40,10 @@ let make = () => {
     None;
   });
 
+  let (show, setShow) = React.useState(_ => false);
+
   let buttonClicked = _ => {
-    Js.log("FOO");
+    setShow(_ => true);
   };
 
   <>
@@ -57,5 +59,10 @@ let make = () => {
        |> Array.of_list
        |> React.array}
     </TodoList>
+    <AddTodoModal
+      show
+      onCancel={() => setShow(_ => false)}
+      onSubmit=ignore
+    />
   </>;
 };

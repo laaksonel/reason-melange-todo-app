@@ -18,11 +18,13 @@ module Topic = [%styled.div
   |}
 ];
 
-module TopicSection = [%styled.div {|
+module TopicSection = [%styled.div
+  {|
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0%;
-  |}];
+  |}
+];
 
 module AddCircle = {
   [@bs.module "@material-ui/icons/AddCircle"] [@react.component]
@@ -35,6 +37,20 @@ module AddCircle = {
     ) =>
     React.element =
     "default";
+};
+
+module ErrorHandler = {
+  [@react.component]
+  let make = (~error, ~info) => {
+    let msg =
+      switch (Js.Exn.message(error)) {
+      | Some(x) => x
+      | None => "unknown"
+      };
+
+    Js.log(info);
+    React.string("An error occured: " ++ msg);
+  };
 };
 
 [@react.component]
@@ -56,13 +72,18 @@ let make = () => {
     setShow(_ => false);
   };
 
-  <>
+  <RescriptReactErrorBoundary
+    fallback={({error, info}) => <ErrorHandler error info />}>
     <Topic>
       <TopicSection />
-      <TopicSection><p style=ReactDOM.Style.make(~textAlign="center", ~margin="0", ())>{React.string("TODO")}</p></TopicSection>
+      <TopicSection>
+        <p style={ReactDOM.Style.make(~textAlign="center", ~margin="0", ())}>
+          {React.string("TODO")}
+        </p>
+      </TopicSection>
       <TopicSection>
         <Mui.IconButton onClick=openModal>
-          <AddCircle htmlColor="#f50057" fontSize="50px" />
+          <AddCircle htmlColor="#f50057" fontSize="large" />
         </Mui.IconButton>
       </TopicSection>
     </Topic>
@@ -82,5 +103,5 @@ let make = () => {
         |> closeModal
       }
     />
-  </>;
+  </RescriptReactErrorBoundary>;
 };

@@ -1,6 +1,6 @@
 type state = {items: list(TodoItem.t)};
 
-let emptyState: state = { items: [] };
+let emptyState: state = {items: []};
 
 type actions =
   | AddItem(TodoItem.t)
@@ -9,21 +9,24 @@ type actions =
   | SetItems(option(TodoItemCollection.t));
 
 let add = (newItem: TodoItem.t, state: state) => {
-  { items: [newItem, ...state.items] };
+  {items: [newItem, ...state.items]};
 };
 
-let delete = (id, state) =>
-  { items: state.items |> List.filter((item: TodoItem.t) => item.id != id) };
+let delete = (id, state) => {
+  items: state.items |> List.filter((item: TodoItem.t) => item.id != id),
+};
 
 let toggle = (id, state) => {
-  items: state.items |> List.map((item: TodoItem.t) => {
-      item.id == id ? { ...item, completed: !item.completed } : item
-    })
-  };
+  items:
+    state.items
+    |> List.map((item: TodoItem.t) => {
+         item.id == id ? {...item, completed: !item.completed} : item
+       }),
+};
 
 let set = (items: option(TodoItemCollection.t), _state: state) => {
   switch (items) {
-  | Some(items) => { items: items.items }
+  | Some(items) => {items: items.items}
   | None => emptyState
   };
 };

@@ -1,3 +1,5 @@
+exception TodoFetchError(Js.Promise.error);
+
 let encodeTodo = (item: TodoItem.t) => {
   open Json.Encode;
   let props = [
@@ -21,23 +23,22 @@ let decodeTodoCollection = (json): TodoItemCollection.t => {
 };
 
 let fetchTodos = () => {
-  Js.Promise.
-    // TODO: Error handling
-    (
-      Fetch.fetch("/todos")
-      |> then_(Fetch.Response.json)
-      |> then_(json =>
-           json
-           |> decodeTodoCollection
-           |> (
-             todos =>
-               resolve(
-                 TodoStore.store.dispatch(TodoStore.SetItems(Some(todos))),
-               )
-           )
+  Js.Promise.(
+    Fetch.fetch("/todos")
+    |> then_(Fetch.Response.json)
+    |> then_(json =>
+         json
+         |> decodeTodoCollection
+         |> (
+           todos =>
+             resolve(
+               TodoStore.store.dispatch(TodoStore.SetItems(Some(todos))),
+             )
          )
-      |> ignore
-    );
+       )
+    |> catch(e => reject(TodoFetchError(e)))
+    |> ignore
+  );
 };
 
 let toggleItem = (id: int) => {

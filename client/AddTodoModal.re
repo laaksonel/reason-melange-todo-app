@@ -38,8 +38,8 @@ module ModalBody = [%styled.div
 
 module ModalFooter = [%styled.div
   {|
-    background-color: #fff;
-    width: 600px;
+    display: flex;
+    justify-content: end;
   |}
 ];
 
@@ -74,11 +74,11 @@ let make = (~show: bool, ~onCancel: unit => unit, ~onSubmit) =>
           />
         </ModalBody>
         <ModalFooter>
-          <Mui.Button onClick={_ => onCancel()}>
-            {React.string("Cancel")}
-          </Mui.Button>
           <Mui.Button onClick={_ => onSubmit(text)}>
             {React.string("Save")}
+          </Mui.Button>
+          <Mui.Button onClick={_ => onCancel()}>
+            {React.string("Cancel")}
           </Mui.Button>
         </ModalFooter>
       </ModalContent>
